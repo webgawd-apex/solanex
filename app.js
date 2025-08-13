@@ -181,7 +181,12 @@ function setDisconnectedUI() {
   `;
 }
 
-// --- Wallet flow ---
+// --- Mobile detection helper ---
+function isMobile() {
+  return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+}
+
+// --- Wallet flow with deep linking for mobile ---
 async function connectSelectedWallet(adapterName) {
   currentWallet = adapters[adapterName];
 
@@ -198,7 +203,38 @@ async function connectSelectedWallet(adapterName) {
   }
 
   try {
+    if (isMobile()) {
+      // Mobile deep linking logic
+      const appUrl = encodeURIComponent(window.location.origin);
+      const appName = encodeURIComponent("YourAppName"); // Change to your app name
+
+      let deepLinkUrl = "";
+
+      switch (adapterName) {
+        case "Phantom":
+          deepLinkUrl = `phantom://connect?app_url=${appUrl}&app_name=${appName}`;
+          break;
+        case "Solflare":
+          deepLinkUrl = `solflare://wallet/connect?app_url=${appUrl}&app_name=${appName}`;
+          break;
+        case "Glow":
+          // Glow has no known deep link; fallback to normal connect
+          await currentWallet.connect();
+          break;
+        default:
+          await currentWallet.connect();
+      }
+
+      if (deepLinkUrl) {
+        window.location.href = deepLinkUrl;
+        showNotification("Opening wallet app to connect. Please approve the connection.", "primary");
+        return;
+      }
+    }
+
+    // Desktop or fallback
     await currentWallet.connect();
+
     currentAddress = currentWallet.publicKey;
     closeModalFn();
     const addressStr = currentAddress.toString();
