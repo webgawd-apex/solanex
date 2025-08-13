@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us | Solanex Pro</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    :root {
+        --primary: #9945FF;
+        --secondary: #14F195;
+        --dark: #0f172a;
+        --darker: #0a1120;
+        --card: #1e293b;
+        --border: #334155;
+        --text: #e2e8f0;
+        --text-secondary: #94a3b8;
+        --success: #10b981;
+        --danger: #ef4444;
+        --warning: #f59e0b;
+    }
+
+    body {
+        background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+        color: var(--text);
+        min-height: 100vh;
+        line-height: 1.6;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+    }
+
+    /* Header Styles */
+    .header {
+        background: rgba(30, 41, 59, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border);
+        padding: 1rem 0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        text-decoration: none;
+    }
+
+    .logo-icon {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        padding: 0.5rem;
+        border-radius: 0.8rem;
+        color: white;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logo-text {
+        font-size: 1.8rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+    }
+
+    .nav-links a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s;
+        font-size: 1.1rem;
+    }
+
+    .nav-links a:hover {
+        color: var(--secondary);
+    }
+
+    /* Main Content */
+    .main-content {
+        padding: 6rem 0;
+    }
+
+    .page-title {
+        text-align: center;
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .page-subtitle {
+        text-align: center;
+        color: var(--text-secondary);
+        font-size: 1.3rem;
+        max-width: 800px;
+        margin: 0 auto 4rem;
+        line-height: 1.7;
+    }
+
+    .about-section {
+        background: rgba(30, 41, 59, 0.8);
+        border: 1px solid var(--border);
+        border-radius: 1.25rem;
+        padding: 3rem;
+        margin-bottom: 3rem;
+        backdrop-filter: blur(10px);
+    }
+
+    .about-section h2 {
+        font-size: 2.2rem;
+        margin-bottom: 1.5rem;
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .about-section h2 i {
+        color: var(--secondary);
+    }
+
+    .about-section p {
+        color: var(--text-secondary);
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin-bottom: 1.5rem;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        margin: 3rem 0;
+    }
+
+    .stat-card {
+        background: rgba(51, 65, 85, 0.5);
+        border: 1px solid var(--border);
+        border-radius: 1rem;
+        padding: 2rem;
+        text-align: center;
+        transition: all 0.3s;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--secondary);
+    }
+
+    .stat-number {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .stat-label {
+        color: var(--text-secondary);
+        font-size: 1rem;
+    }
+
+    .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2.5rem;
+        margin-top: 3rem;
+    }
+
+    .team-card {
+        background: rgba(51, 65, 85, 0.5);
+        border: 1px solid var(--border);
+        border-radius: 1.25rem;
+        padding: 2.5rem;
+        text-align: center;
+        transition: all 0.3s;
+    }
+
+    .team-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--secondary);
+        box-shadow: 0 10px 30px rgba(20, 241, 149, 0.1);
+    }
+
+    .team-avatar {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin: 0 auto 1.5rem;
+    }
+
+    .team-card h3 {
+        color: var(--text);
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .team-card .role {
+        color: var(--secondary);
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    .team-card p {
+        color: var(--text-secondary);
+        line-height: 1.6;
+    }
+
+    .values-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .value-card {
+        background: rgba(51, 65, 85, 0.5);
+        border: 1px solid var(--border);
+        border-radius: 1rem;
+        padding: 2rem;
+        transition: all 0.3s;
+    }
+
+    .value-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--secondary);
+    }
+
+    .value-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .value-card h3 {
+        color: var(--text);
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+    }
+
+    .value-card p {
+        color: var(--text-secondary);
+        line-height: 1.6;
+    }
+
+    .cta-section {
+        text-align: center;
+        background: rgba(30, 41, 59, 0.8);
+        border: 1px solid var(--border);
+        border-radius: 1.25rem;
+        padding: 4rem 3rem;
+        margin-top: 4rem;
+        backdrop-filter: blur(10px);
+    }
+
+    .cta-section h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+        color: var(--text);
+    }
+
+    .cta-section p {
+        color: var(--text-secondary);
+        font-size: 1.2rem;
+        margin-bottom: 2.5rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .btn {
+        padding: 1.1rem 2.5rem;
+        border-radius: 0.75rem;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.3s;
+        border: none;
+        cursor: pointer;
+        font-size: 1.1rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        box-shadow: 0 6px 20px rgba(153, 69, 255, 0.4);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(153, 69, 255, 0.5);
+    }
+
+    /* Footer */
+    .footer {
+        background: rgba(15, 23, 42, 0.95);
+        border-top: 1px solid var(--border);
+        padding: 2rem 0;
+        text-align: center;
+        color: var(--text-secondary);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .nav-links {
+            display: none;
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+        }
+        
+        .about-section {
+            padding: 2rem;
+        }
+        
+        .team-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .cta-section {
+            padding: 3rem 2rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .page-title {
+            font-size: 2rem;
+        }
+        
+        .about-section {
+            padding: 1.5rem;
+        }
+        
+        .about-section h2 {
+            font-size: 1.8rem;
+        }
+    }
+</style>
+</head>
+<body>
+<!-- Header -->
+<header class="header">
+    <nav class="nav container">
+        <a href="index.html" class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-robot"></i>
+            </div>
+            <span class="logo-text">Solanex Pro</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html#how-it-works">How It Works</a></li>
+            <li><a href="index.html#testimonials">Reviews</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="about.html">About Us</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Main Content -->
+<main class="main-content">
+    <div class="container">
+        <h1 class="page-title">About Solanex Pro</h1>
+        <p class="page-subtitle">We're revolutionizing Solana memecoin trading with cutting-edge AI technology and professional-grade tools designed for both beginners and expert traders.</p>
+
+        <!-- Our Story -->
+        <div class="about-section">
+            <h2><i class="fas fa-rocket"></i> Our Story</h2>
+            <p>Founded in 2023 by a team of blockchain engineers, quantitative traders, and AI specialists, Solanex Pro was born from the frustration of missing profitable opportunities in the fast-moving Solana memecoin market.</p>
+            <p>We recognized that manual trading simply couldn't keep up with the speed and complexity of modern DeFi markets. Traditional tools were either too slow, too expensive, or lacked the sophisticated features needed to compete effectively.</p>
+            <p>Our mission became clear: democratize access to professional-grade trading tools and level the playing field for retail traders through the power of artificial intelligence and automation.</p>
+        </div>
+
+        <!-- Our Mission -->
+        <div class="about-section">
+            <h2><i class="fas fa-target"></i> Our Mission</h2>
+            <p>To empower every trader with institutional-grade tools and AI-powered insights, making profitable Solana memecoin trading accessible to everyone, regardless of experience level or capital size.</p>
+            <p>We believe that advanced trading technology shouldn't be exclusive to hedge funds and institutional investors. Every trader deserves access to the same sophisticated tools and real-time market intelligence that drive consistent profits.</p>
+        </div>
+
+        <!-- Company Stats -->
+        <div class="about-section">
+            <h2><i class="fas fa-chart-line"></i> Our Impact</h2>
+            <p>Since our launch, we've helped thousands of traders achieve their financial goals through smarter, more efficient trading strategies.</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">$24.8M+</div>
+                    <div class="stat-label">Total Volume Traded</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">18,500+</div>
+                    <div class="stat-label">Active Users</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5,280+</div>
+                    <div class="stat-label">Tokens Analyzed Daily</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">99.98%</div>
+                    <div class="stat-label">Platform Uptime</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Our Team -->
+        <div class="about-section">
+            <h2><i class="fas fa-users"></i> Meet Our Team</h2>
+            <p>Our diverse team combines decades of experience in blockchain technology, quantitative finance, artificial intelligence, and software engineering.</p>
+            
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-avatar">AK</div>
+                    <h3>Alex Kim</h3>
+                    <div class="role">CEO & Co-Founder</div>
+                    <p>Former Goldman Sachs quantitative trader with 8+ years in algorithmic trading. Led development of high-frequency trading systems managing $500M+ in assets.</p>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-avatar">SM</div>
+                    <h3>Sarah Martinez</h3>
+                    <div class="role">CTO & Co-Founder</div>
+                    <p>Ex-Google AI engineer specializing in machine learning and blockchain infrastructure. PhD in Computer Science from Stanford University.</p>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-avatar">DJ</div>
+                    <h3>David Johnson</h3>
+                    <div class="role">Head of Product</div>
+                    <p>Former Coinbase product manager with deep expertise in DeFi protocols and user experience design. Built trading platforms used by millions.</p>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-avatar">LC</div>
+                    <h3>Lisa Chen</h3>
+                    <div class="role">Lead Data Scientist</div>
+                    <p>AI researcher with expertise in predictive modeling and market analysis. Previously at Two Sigma developing trading algorithms.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Our Values -->
+        <div class="about-section">
+            <h2><i class="fas fa-heart"></i> Our Values</h2>
+            <p>These core principles guide everything we do and shape how we build products for our community.</p>
+            
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Security First</h3>
+                    <p>We prioritize the security of our users' funds and data above all else, implementing bank-grade security measures and regular audits.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Community Driven</h3>
+                    <p>Our roadmap is shaped by user feedback and community needs. We build features that our traders actually want and use.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Innovation</h3>
+                    <p>We continuously push the boundaries of what's possible in automated trading, leveraging the latest advances in AI and blockchain technology.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3>Transparency</h3>
+                    <p>We believe in complete transparency about our algorithms, fees, and performance metrics. No hidden costs or black box systems.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technology -->
+        <div class="about-section">
+            <h2><i class="fas fa-cogs"></i> Our Technology</h2>
+            <p>Solanex Pro is built on cutting-edge infrastructure designed for speed, reliability, and scalability:</p>
+            <p><strong>AI-Powered Analysis:</strong> Our proprietary machine learning models analyze thousands of data points including social sentiment, on-chain metrics, trading patterns, and market microstructure to identify profitable opportunities.</p>
+            <p><strong>Ultra-Low Latency:</strong> Direct connections to Solana RPC nodes and optimized code execution ensure trades are executed in milliseconds, giving you the edge in fast-moving markets.</p>
+            <p><strong>Risk Management:</strong> Advanced position sizing, stop-loss mechanisms, and portfolio optimization algorithms protect your capital while maximizing returns.</p>
+            <p><strong>Scalable Infrastructure:</strong> Built on AWS with auto-scaling capabilities to handle high-volume trading periods without performance degradation.</p>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="cta-section">
+            <h2>Ready to Transform Your Trading?</h2>
+            <p>Join thousands of successful traders who have already discovered the power of AI-driven Solana memecoin trading.</p>
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <p>&copy; 2024 Solanex Pro. All rights reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

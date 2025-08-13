@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Started - Solanex Pro Onboarding</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #9945FF;
+            --secondary: #14F195;
+            --dark: #0f172a;
+            --darker: #0a1120;
+            --card: #1e293b;
+            --border: #334155;
+            --text: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --success: #10b981;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .logo-icon {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 0.8rem;
+            border-radius: 1rem;
+            color: white;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .logo-text {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 1rem;
+            padding: 1.2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .progress-text {
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .progress-counter {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(51, 65, 85, 0.5);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 3px;
+            transition: width 0.3s ease;
+            width: 12.5%;
+        }
+
+        /* Question Card */
+        .question-card {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 1.5rem;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            margin-bottom: 2rem;
+        }
+
+        .question-card.hidden {
+            display: none;
+        }
+
+        .question-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            color: white;
+            font-weight: bold;
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+        }
+
+        .question-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1.8rem;
+            color: var(--text);
+            line-height: 1.4;
+        }
+
+        /* Options */
+        .options {
+            display: grid;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option {
+            background: rgba(51, 65, 85, 0.3);
+            border: 2px solid var(--border);
+            border-radius: 0.8rem;
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .option:hover {
+            border-color: var(--secondary);
+            background: rgba(20, 241, 149, 0.1);
+        }
+
+        .option.selected {
+            border-color: var(--primary);
+            background: rgba(153, 69, 255, 0.15);
+            box-shadow: 0 5px 15px rgba(153, 69, 255, 0.2);
+        }
+
+        .option-radio {
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            position: relative;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+
+        .option.selected .option-radio {
+            border-color: var(--primary);
+            background: var(--primary);
+        }
+
+        .option.selected .option-radio::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .option-text {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text);
+            flex: 1;
+        }
+
+        .option-icon {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+
+        .option.selected .option-icon {
+            color: var(--primary);
+        }
+
+        /* Text Input */
+        .text-input {
+            width: 100%;
+            background: rgba(51, 65, 85, 0.3);
+            border: 2px solid var(--border);
+            border-radius: 0.8rem;
+            padding: 1rem 1.2rem;
+            color: var(--text);
+            font-size: 1rem;
+            transition: all 0.3s;
+            resize: vertical;
+            min-height: 100px;
+            font-family: inherit;
+            margin-bottom: 1.5rem;
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(153, 69, 255, 0.1);
+            box-shadow: 0 0 15px rgba(153, 69, 255, 0.2);
+        }
+
+        .text-input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        /* Other Input */
+        .other-input {
+            width: 100%;
+            background: rgba(51, 65, 85, 0.3);
+            border: 2px solid var(--border);
+            border-radius: 0.8rem;
+            padding: 0.8rem 1rem;
+            color: var(--text);
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            font-family: inherit;
+            margin-top: 0.8rem;
+            display: none;
+        }
+
+        .other-input.show {
+            display: block;
+        }
+
+        .other-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(153, 69, 255, 0.1);
+        }
+
+        /* Multiple Selection */
+        .multiple-selection .option-radio {
+            border-radius: 4px;
+        }
+
+        .multiple-selection .option.selected .option-radio::after {
+            content: '✓';
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            width: auto;
+            height: auto;
+            background: none;
+        }
+
+        /* Navigation Buttons */
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.9rem 1.8rem;
+            border-radius: 0.6rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-family: inherit;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: rgba(51, 65, 85, 0.8);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: rgba(71, 85, 105, 0.9);
+            border-color: #64748b;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 4px 15px rgba(153, 69, 255, 0.3);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            box-shadow: 0 6px 20px rgba(153, 69, 255, 0.4);
+        }
+
+        /* Completion Screen */
+        .completion-screen {
+            text-align: center;
+            padding: 3rem 2rem;
+            display: none;
+        }
+
+        .completion-screen.active {
+            display: block;
+        }
+
+        .completion-icon {
+            font-size: 4rem;
+            color: var(--success);
+            margin-bottom: 2rem;
+        }
+
+        .completion-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .completion-text {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .question-card {
+                padding: 2rem 1.5rem;
+            }
+            
+            .question-title {
+                font-size: 1.4rem;
+            }
+            
+            .navigation {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <span class="logo-text">Solanex Pro</span>
+            </div>
+            <h1>Let's Get You Started!</h1>
+            <p>Help us customize your trading experience by answering a few quick questions.</p>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-info">
+                <span class="progress-text">Setup Progress</span>
+                <span class="progress-counter"><span id="current-step">1</span> of 8</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+        </div>
+
+        <!-- Question 1: Trading Experience -->
+        <div class="question-card" id="question-1">
+            <div class="question-number">1</div>
+            <h2 class="question-title">How many years of trading experience do you have?</h2>
+            <div class="options">
+                <div class="option" data-value="less-than-1">
+                    <div class="option-radio"></div>
+                    <span class="option-text">Less than 1 year</span>
+                    <i class="fas fa-seedling option-icon"></i>
+                </div>
+                <div class="option" data-value="1-3">
+                    <div class="option-radio"></div>
+                    <span class="option-text">1–3 years</span>
+                    <i class="fas fa-chart-line option-icon"></i>
+                </div>
+                <div class="option" data-value="3-5">
+                    <div class="option-radio"></div>
+                    <span class="option-text">3–5 years</span>
+                    <i class="fas fa-trophy option-icon"></i>
+                </div>
+                <div class="option" data-value="5-plus">
+                    <div class="option-radio"></div>
+                    <span class="option-text">5+ years</span>
+                    <i class="fas fa-crown option-icon"></i>
+                </div>
+                <div class="option other-option" data-value="other">
+                    <div class="option-radio"></div>
+                    <span class="option-text">Other</span>
+                    <i class="fas fa-ellipsis-h option-icon"></i>
+                </div>
+            </div>
+            <input type="text" class="other-input" placeholder="Please specify your experience..." id="other-input-1">
+        </div>
+
+        <!-- Question 2: Trade Frequency -->
+        <div class="question-card hidden" id="question-2">
+            <div class="question-number">2</div>
+            <h2 class="question-title">What is your average trade frequency?</h2>
+            <div class="options">
+                <div class="option" data-value="daily">
+                    <div class="option-radio"></div>
+                    <span class="option-text">Daily</span>
+                    <i class="fas fa-calendar-day option-icon"></i>
+                </div>
+                <div class="option" data-value="weekly">
+                    <div class="option-radio"></div>
+                    <span class="option-text">Weekly</span>
+                    <i class="fas fa-calendar-week option-icon"></i>
+                </div>
+                <div class="option" data-value="monthly">
+                    <div class="option-radio"></div>
+                    <span class="option-text">Monthly</span>
+                    <i class="fas fa-calendar-alt option-icon"></i>
+                </div>
+                <div class="option" data-value="occasionally">
+                    <div class="option-radio"></div>
+                    <span class="option-text">Occasionally</span>
+                    <i class="fas fa-clock option-icon"></i>
+                </div>
+                <div class="option other-option" data-value="other">
+                    <div class="option-radio"></div>
+                    <span class="option-text">Other</span>
+                    <i class="fas fa-ellipsis-h option-icon"></i>
+                </div>
+            </div>
+            <input type="text" class="other-input" placeholder="Please specify your frequency..." id="other-input-2">
+        </div>
+
+        <!-- Question 3: Trading Style -->
+        <div class="question-card hidden" id="question-3">
+            <div class="question-number">3</div>
+            <h2 class="question-title">What is your preferred trading style?</h2>
+            <div class="options">
+                <div class="option" data-value="scalping">
+                    <div class="option-radio"></div>
+                    <span class="option-text">Scalping</span>
+                    <i class="fas fa-bolt option-icon"></i>
+                </div>
+                <div class="option" data-value="day-trading">
+                    <div class="option-radio"></div>
+                    <span class="option-text">Day trading</span>
+                    <i class="fas fa-sun option-icon"></i>
+                </div>
+                <div class="option" data-value="long-term">
+                    <div class="option-radio"></div>
+                    <span class="option-text">Long-term investing</span>
+                    <i class="fas fa-mountain option-icon"></i>
+                </div>
+                <div class="option" data-value="copy-trading">
+                    <div class="option-radio"></div>
+                    <span class="option-text">Copy/social trading</span>
+                    <i class="fas fa-users option-icon"></i>
+                </div>
+                <div class="option other-option" data-value="other">
+                    <div class="option-radio"></div>
+                    <span class="option-text">Other</span>
+                    <i class="fas fa-ellipsis-h option-icon"></i>
+                </div>
+            </div>
+            <input type="text" class="other-input" placeholder="Please specify your trading style..." id="other-input-3">
+        </div>
+
+        <!-- Question 4: Trading Goals -->
+        <div class="question-card hidden" id="question-4">
+            <div class="question-number">4</div>
+            <h2 class="question-title">What are your top 3 goals as a trader?</h2>
+            <textarea class="text-input" placeholder="e.g., consistent profits, better risk management, portfolio growth, passive income, etc." rows="4"></textarea>
+        </div>
+
+        <!-- Question 5: Trading Challenges -->
+        <div class="question-card multiple-selection hidden" id="question-5">
+            <div class="question-number">5</div>
+            <h2 class="question-title">What challenges do you face the most when trading?</h2>
+            <div class="options">
+                <div class="option" data-value="emotional-discipline">
+                    <div class="option-radio"></div>
+                    <span class="option-text">Emotional discipline</span>
+                    <i class="fas fa-brain option-icon"></i>
+                </div>
+                <div class="option" data-value="entry-exit-timing">
+                    <div class="option-radio"></div>
+                    <span class="option-text">Entry/exit timing</span>
+                    <i class="fas fa-stopwatch option-icon"></i>
+                </div>
+                <div class="option" data-value="risk-management">
+                    <div class="option-radio"></div>
+                    <span class="option-text">Risk management</span>
+                    <i class="fas fa-shield-alt option-icon"></i>
+                </div>
+                <div class="option" data-value="reliable-signals">
+                    <div class="option-radio"></div>
+                    <span class="option-text">Finding reliable signals</span>
+                    <i class="fas fa-search option-icon"></i>
+                </div>
+                <div class="option other-option" data-value="other">
+                    <div class="option-radio"></div>
+                    <span class="option-text">Other</span>
+                    <i class="fas fa-ellipsis-h option-icon"></i>
+                </div>
+            </div>
+            <input type="text" class="other-input" placeholder="Please specify other challenges..." id="other-input-5">
+        </div>
+
+        <!-- Question 6: Experience Level -->
+        <div class="question-card hidden" id="question-6">
+            <div class="question-number">6</div>
+            <h2 class="question-title">How would you rate your overall trading experience?</h2>
+            <div class="options">
+                <div class="option" data-value="beginner">
+                    <div class="option-radio"></div>
+                    <span class="option-text">Beginner</span>
+                    <i class="fas fa-leaf option-icon"></i>
+                </div>
+                <div class="option" data-value="intermediate">
+                    <div class="option-radio"></div>
+                    <span class="option-text">Intermediate</span>
+                    <i class="fas fa-chart-bar option-icon"></i>
+                </div>
+                <div class="option" data-value="advanced">
+                    <div class="option-radio"></div>
+                    <span class="option-text">Advanced</span>
+                    <i class="fas fa-medal option-icon"></i>
+                </div>
+                <div class="option" data-value="professional">
+                    <div class="option-radio"></div>
+                    <span class="option-text">Professional</span>
+                    <i class="fas fa-star option-icon"></i>
+                </div>
+                <div class="option other-option" data-value="other">
+                    <div class="option-radio"></div>
+                    <span class="option-text">Other</span>
+                    <i class="fas fa-ellipsis-h option-icon"></i>
+                </div>
+            </div>
+            <input type="text" class="other-input" placeholder="Please describe your experience level..." id="other-input-6">
+        </div>
+
+        <!-- Question 7: Primary Goal -->
+        <div class="question-card hidden" id="question-7">
+            <div class="question-number">7</div>
+            <h2 class="question-title">What is your primary goal with trading?</h2>
+            <div class="options">
+                <div class="option" data-value="side-income">
+                    <div class="option-radio"></div>
+                    <span class="option-text">Generate side income</span>
+                    <i class="fas fa-coins option-icon"></i>
+                </div>
+                <div class="option" data-value="financial-freedom">
+                    <div class="option-radio"></div>
+                    <span class="option-text">Achieve financial freedom</span>
+                    <i class="fas fa-rocket option-icon"></i>
+                </div>
+                <div class="option" data-value="replace-job">
+                    <div class="option-radio"></div>
+                    <span class="option-text">Replace my full-time job</span>
+                    <i class="fas fa-briefcase option-icon"></i>
+                </div>
+                <div class="option" data-value="grow-wealth">
+                    <div class="option-radio"></div>
+                    <span class="option-text">Grow wealth over time</span>
+                    <i class="fas fa-chart-line option-icon"></i>
+                </div>
+                <div class="option" data-value="learn-skill">
+                    <div class="option-radio"></div>
+                    <span class="option-text">Learn a new skill</span>
+                    <i class="fas fa-graduation-cap option-icon"></i>
+                </div>
+                <div class="option other-option" data-value="other">
+                    <div class="option-radio"></div>
+                    <span class="option-text">Other</span>
+                    <i class="fas fa-ellipsis-h option-icon"></i>
+                </div>
+            </div>
+            <input type="text" class="other-input" placeholder="Please specify your goal..." id="other-input-7">
+        </div>
+
+        <!-- Question 8: Barriers -->
+        <div class="question-card multiple-selection hidden" id="question-8">
+            <div class="question-number">8</div>
+            <h2 class="question-title">What's currently holding you back from reaching your trading goals?</h2>
+            <div class="options">
+                <div class="option" data-value="lack-time">
+                    <div class="option-radio"></div>
+                    <span class="option-text">Lack of time</span>
+                    <i class="fas fa-clock option-icon"></i>
+                </div>
+                <div class="option" data-value="lack-capital">
+                    <div class="option-radio"></div>
+                    <span class="option-text">Lack of capital</span>
+                    <i class="fas fa-wallet option-icon"></i>
+                </div>
+                <div class="option" data-value="lack-knowledge">
+                    <div class="option-radio"></div>
+                    <span class="option-text">Lack of knowledge</span>
+                    <i class="fas fa-book option-icon"></i>
+                </div>
+                <div class="option" data-value="emotional-barriers">
+                    <div class="option-radio"></div>
+                    <span class="option-text">Emotional/psychological barriers</span>
+                    <i class="fas fa-heart option-icon"></i>
+                </div>
+                <div class="option" data-value="no-plan">
+                    <div class="option-radio"></div>
+                    <span class="option-text">No clear plan</span>
+                    <i class="fas fa-map option-icon"></i>
+                </div>
+                <div class="option other-option" data-value="other-barrier">
+                    <div class="option-radio"></div>
+                    <span class="option-text">Other</span>
+                    <i class="fas fa-question option-icon"></i>
+                </div>
+            </div>
+            <input type="text" class="other-input" placeholder="Please specify other barriers..." id="other-input-8">
+        </div>
+
+        <!-- Completion Screen -->
+        <div class="completion-screen" id="completion-screen">
+            <div class="completion-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2 class="completion-title">You're All Set!</h2>
+            <p class="completion-text">
+                Thank you for completing the setup! We're now customizing your Solanex Pro experience based on your preferences. 
+                Get ready to take your trading to the next level!
+            </p>
+            <button class="btn btn-primary" onclick="window.location.href='dashboard.html'">
+                <i class="fas fa-rocket"></i> Launch Trading Dashboard
+            </button>
+        </div>
+
+        <!-- Navigation -->
+        <div class="navigation" id="navigation">
+            <button class="btn btn-secondary" id="prev-btn" onclick="previousQuestion()" disabled>
+                <i class="fas fa-arrow-left"></i> Previous
+            </button>
+            <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()" disabled>
+                Next <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let currentQuestion = 1;
+        const totalQuestions = 8;
+        const answers = {};
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            // Single selection options
+            document.querySelectorAll('.question-card:not(.multiple-selection) .option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const questionCard = this.closest('.question-card');
+                    const questionId = questionCard.id;
+                    
+                    // Remove selected class from siblings
+                    questionCard.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+                    
+                    // Add selected class to clicked option
+                    this.classList.add('selected');
+                    
+                    // Handle "Other" option
+                    if (this.classList.contains('other-option')) {
+                        const otherInput = questionCard.querySelector('.other-input');
+                        otherInput.classList.add('show');
+                        setTimeout(() => otherInput.focus(), 100);
+                        
+                        // Store answer when user types
+                        otherInput.oninput = function() {
+                            if (this.value.trim()) {
+                                answers[questionId] = 'other: ' + this.value.trim();
+                                // Auto-advance after typing
+                                setTimeout(() => {
+                                    if (currentQuestion < totalQuestions) {
+                                        nextQuestion();
+                                    }
+                                }, 1000);
+                            }
+                        };
+                    } else {
+                        // Hide other input if it exists
+                        const otherInput = questionCard.querySelector('.other-input');
+                        if (otherInput) {
+                            otherInput.classList.remove('show');
+                        }
+                        
+                        // Store answer
+                        answers[questionId] = this.dataset.value;
+                        
+                        // Auto-advance after selection
+                        setTimeout(() => {
+                            if (currentQuestion < totalQuestions) {
+                                nextQuestion();
+                            }
+                        }, 500);
+                    }
+                });
+            });
+
+            // Multiple selection options
+            document.querySelectorAll('.multiple-selection .option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const questionCard = this.closest('.question-card');
+                    const questionId = questionCard.id;
+                    
+                    // Handle "Other" option
+                    if (this.classList.contains('other-option')) {
+                        this.classList.toggle('selected');
+                        const otherInput = questionCard.querySelector('.other-input');
+                        
+                        if (this.classList.contains('selected')) {
+                            otherInput.classList.add('show');
+                            setTimeout(() => otherInput.focus(), 100);
+                        } else {
+                            otherInput.classList.remove('show');
+                            otherInput.value = '';
+                        }
+                        
+                        // Handle other input
+                        otherInput.oninput = function() {
+                            updateMultipleSelectionAnswers(questionCard, questionId);
+                        };
+                    } else {
+                        // Toggle selected class for regular options
+                        this.classList.toggle('selected');
+                    }
+                    
+                    // Update answers
+                    updateMultipleSelectionAnswers(questionCard, questionId);
+                });
+            });
+
+            // Text input
+            document.querySelectorAll('.text-input').forEach(input => {
+                input.addEventListener('input', function() {
+                    const questionCard = this.closest('.question-card');
+                    const questionId = questionCard.id;
+                    
+                    // Store answer
+                    answers[questionId] = this.value.trim();
+                    
+                    // Enable next button if input has content
+                    document.getElementById('next-btn').disabled = this.value.trim().length === 0;
+                });
+            });
+        }
+
+        function updateMultipleSelectionAnswers(questionCard, questionId) {
+            const selectedOptions = questionCard.querySelectorAll('.option.selected:not(.other-option)');
+            const otherOption = questionCard.querySelector('.other-option.selected');
+            const otherInput = questionCard.querySelector('.other-input');
+            
+            let selectedValues = Array.from(selectedOptions).map(opt => opt.dataset.value);
+            
+            // Add other input if selected and has value
+            if (otherOption && otherInput && otherInput.value.trim()) {
+                selectedValues.push('other: ' + otherInput.value.trim());
+            }
+            
+            answers[questionId] = selectedValues;
+            
+            // Enable next button if at least one option is selected
+            document.getElementById('next-btn').disabled = selectedValues.length === 0;
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < totalQuestions) {
+                // Hide current question
+                document.getElementById(`question-${currentQuestion}`).classList.add('hidden');
+                
+                // Show next question
+                currentQuestion++;
+                document.getElementById(`question-${currentQuestion}`).classList.remove('hidden');
+                
+                updateProgress();
+                updateButtons();
+            } else {
+                // Show completion screen
+                document.getElementById(`question-${currentQuestion}`).classList.add('hidden');
+                document.getElementById('navigation').style.display = 'none';
+                document.querySelector('.progress-container').style.display = 'none';
+                document.getElementById('completion-screen').classList.add('active');
+                
+                // Update progress to 100%
+                document.getElementById('progress-fill').style.width = '100%';
+                
+                console.log('All answers:', answers);
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 1) {
+                // Hide current question
+                document.getElementById(`question-${currentQuestion}`).classList.add('hidden');
+                
+                // Show previous question
+                currentQuestion--;
+                document.getElementById(`question-${currentQuestion}`).classList.remove('hidden');
+                
+                updateProgress();
+                updateButtons();
+            }
+        }
+
+        function updateProgress() {
+            const progress = (currentQuestion / totalQuestions) * 100;
+            document.getElementById('progress-fill').style.width = `${progress}%`;
+            document.getElementById('current-step').textContent = currentQuestion;
+        }
+
+        function updateButtons() {
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            
+            // Update previous button
+            prevBtn.disabled = currentQuestion === 1;
+            
+            // Update next button text
+            if (currentQuestion === totalQuestions) {
+                nextBtn.innerHTML = '<i class="fas fa-check"></i> Complete Setup';
+            } else {
+                nextBtn.innerHTML = 'Next <i class="fas fa-arrow-right"></i>';
+            }
+            
+            // Check if current question is answered
+            const currentQuestionId = `question-${currentQuestion}`;
+            const isAnswered = answers[currentQuestionId] && 
+                (Array.isArray(answers[currentQuestionId]) ? 
+                    answers[currentQuestionId].length > 0 : 
+                    answers[currentQuestionId].length > 0);
+            
+            nextBtn.disabled = !isAnswered;
+        }
+    </script>
+</body>
+</html>
